@@ -26,6 +26,9 @@ const Header = ({ isMenu }) => {
     { label: "About", path: "/about" },
   ];
 
+  const handleDropDown = () => setDropDown(!dropDown);
+  const toggleMobileMenu = () => setMobileMenu(!mobileMenu);
+
   useEffect(() => {
     let timeout;
     const handleScroll = () => {
@@ -48,8 +51,22 @@ const Header = ({ isMenu }) => {
     };
   }, [lastScrollY, isMenu]);
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropDown(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
+      {/* Desktop Header */}
       <header
         className={`${
           isVisible ? "translate-y-0" : "-translate-y-full"
@@ -61,74 +78,71 @@ const Header = ({ isMenu }) => {
         <nav>
           <ul className="flex gap-10 items-center">
             {navBar.map((item, index) => (
-              <li
-                key={index}
-                className="relative text-lg font-medium group"
-                onMouseEnter={() => item.services && setDropDown(true)}
-                onMouseLeave={
-                  useEffect(() =>
-                  {
-                    const interval = setInterval(() => {
-                      setDropDown(false);
-                    }, 7000);
-                    return () => clearInterval(interval);
-                  }, [])
-                  }
-              >
-                <NavLink to={item.path} className="flex items-center gap-2 cursor-pointer">
-                  {item.label}
-                  {item.services && (dropDown ? <FaAngleUp /> : <FaAngleDown />)}
-                  
+              <li key={index} className="relative text-lg font-medium group">
+                <NavLink to={item.path}>
+                  {item.label === "Services" ? (
+                    <div
+                      className="flex items-center gap-2 cursor-pointer transform-all duration-300"
+                      onClick={handleDropDown}
+                      ref={dropdownRef} // Added ref here
+                    >
+                      {item.label} {dropDown ? <FaAngleUp /> : <FaAngleDown />}
+                      {dropDown && (
+                        <div className="absolute top-14 w-32 bg-gray-800 shadow-lg rounded-xl py-2 z-50">
+                          <ul>
+                            {item.services.map((list, i) => (
+                              <li
+                                key={i}
+                                className="text-lg font-medium flex justify-center items-center hover:bg-white hover:text-gray-900 p-2 cursor-pointer"
+                              >
+                                <NavLink to={list.path}>{list.label}</NavLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <span className="hover:text-gray-300 cursor-pointer">
+                      {item.label}
+                    </span>
+                  )}
+                  <div className="opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100 transition-all duration-300 origin-center h-0.5 w-full bg-gray-300"></div>
                 </NavLink>
-                
-                {item.services && dropDown && (
-                  <div
-                    className="absolute top-14 w-40 bg-gray-800 shadow-lg rounded-xl py-2 z-50"
-                    ref={dropdownRef}
-                  >
-                    <ul>
-                      {item.services.map((list, i) => (
-                        <li
-                          key={i}
-                          className="text-lg font-medium flex justify-center items-center hover:bg-white hover:text-gray-900 p-2 cursor-pointer"
-                        >
-                          <NavLink to={list.path}>{list.label}</NavLink>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
               </li>
             ))}
           </ul>
         </nav>
       </header>
 
+      {/* Mobile Header */}
       <header className="flex md:hidden fixed top-0 w-full h-16 bg-gray-900 shadow-lg px-6 items-center justify-between text-white z-50">
         <span className="text-xl font-bold">
           <AiFillProduct className="size-8" />
         </span>
-        <button onClick={() => setMobileMenu(!mobileMenu)} className="text-2xl">
-          {mobileMenu ? <FaTimes /> : <FaBars />}
+        <button onClick={toggleMobileMenu} className="text-2xl">
+          {mobileMenu ? "" : <FaBars />}
         </button>
       </header>
 
+      {/* Mobile Menu */}
       <div
         className={`fixed top-0 left-0 h-full w-full flex justify-center items-center bg-gray-900 text-white z-50 transform ${
           mobileMenu ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 p-6`}
       >
-        <button onClick={() => setMobileMenu(false)} className="absolute top-5 right-5 text-2xl">
+        <button onClick={toggleMobileMenu} className="absolute top-5 right-5 text-2xl">
           <FaTimes />
         </button>
         <ul className="mt-12 space-y-6">
           {navBar.map((item, index) => (
             <li key={index} className="relative text-xl text-center font-medium">
-              {item.services ? (
+              {item.label === "Services" ? (
                 <>
                   <div
                     className="flex items-center gap-2 cursor-pointer"
-                    onClick={() => setDropDown(!dropDown)}
+                    onClick={handleDropDown}
+                    ref={dropdownRef} // Added ref here
                   >
                     {item.label} {dropDown ? <FaAngleUp /> : <FaAngleDown />}
                   </div>
@@ -136,16 +150,16 @@ const Header = ({ isMenu }) => {
                     <ul className="ml-5 mt-2 space-y-2">
                       {item.services.map((list, i) => (
                         <li key={i} className="text-base cursor-pointer hover:text-gray-400">
-                          <NavLink to={list.path}>{list.label}</NavLink>
+                          {list.label}
                         </li>
                       ))}
                     </ul>
                   )}
                 </>
               ) : (
-                <NavLink to={item.path} className="cursor-pointer hover:text-gray-400">
+                <span className="cursor-pointer hover:text-gray-400">
                   {item.label}
-                </NavLink>
+                </span>
               )}
             </li>
           ))}
