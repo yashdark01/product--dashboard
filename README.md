@@ -1,5 +1,29 @@
 # Product Dashboard
 
+## Installation
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yashdark01/product-dashboard.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd product-dashboard
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+
+## Usage
+1. Start the development server:
+   ```sh
+   npm run dev
+   ```
+2. Open the application in your browser:
+   ```
+   http://localhost:3000
+   ```
+
 ## Description
 Product Dashboard is a web-based application designed to manage and display product-related data efficiently. It is built using React.js, Tailwind CSS, and other modern web technologies.
 
@@ -38,30 +62,6 @@ product-dashboard/
 │── eslint.config.js
 │── README.md
 ```
-
-## Installation
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/yashdark01/product-dashboard.git
-   ```
-2. Navigate to the project directory:
-   ```sh
-   cd product-dashboard
-   ```
-3. Install dependencies:
-   ```sh
-   npm install
-   ```
-
-## Usage
-1. Start the development server:
-   ```sh
-   npm run dev
-   ```
-2. Open the application in your browser:
-   ```
-   http://localhost:3000
-   ```
 
 ## Contributing
 Feel free to fork this repository and submit pull requests. Ensure your code follows the existing style guidelines.
