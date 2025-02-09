@@ -9,7 +9,6 @@ Product Dashboard is a web-based application designed to manage and display prod
 - Error handling and custom error pages
 - Animated loading components
 - Modular and reusable components
-- Git version control integration
 
 ## Technologies Used
 - React.js
