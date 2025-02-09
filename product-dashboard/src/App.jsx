@@ -25,6 +25,13 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/products" element={<ErrorPage />} />
+              <Route path="/services" element={<ErrorPage />} />
+              <Route path="/services/services-1" element={<ErrorPage />} />
+              <Route path="/services/services-2" element={<ErrorPage />} />
+              <Route path="/services/services-3" element={<ErrorPage />} />
+              <Route path="/services/services-4" element={<ErrorPage />} />
+              <Route path="/about" element={<Home />} />
               <Route path="/error" element={<ErrorPage />} />
               {/* <Route path="/about" element={<About />} /> */}
             </Routes>
