@@ -78,6 +78,7 @@ const Header = ({ isMenu }) => {
                 <NavLink to={item.path} className="flex items-center gap-2 cursor-pointer">
                   {item.label}
                   {item.services && (dropDown ? <FaAngleUp /> : <FaAngleDown />)}
+                  
                 </NavLink>
                 
                 {item.services && dropDown && (
