@@ -15,7 +15,7 @@ const Header = ({ isMenu }) => {
     { label: "Product", path: "/products" },
     {
       label: "Services",
-      path: "/services",
+      path: "/",
       services: [
         { label: "Service 1", path: "/services/services-1" },
         { label: "Service 2", path: "/services/services-2" },
@@ -66,7 +66,6 @@ const Header = ({ isMenu }) => {
 
   return (
     <>
-      {/* Desktop Header */}
       <header
         className={`${
           isVisible ? "translate-y-0" : "-translate-y-full"
@@ -84,7 +83,7 @@ const Header = ({ isMenu }) => {
                     <div
                       className="flex items-center gap-2 cursor-pointer transform-all duration-300"
                       onClick={handleDropDown}
-                      ref={dropdownRef} // Added ref here
+                      ref={dropdownRef} 
                     >
                       {item.label} {dropDown ? <FaAngleUp /> : <FaAngleDown />}
                       {dropDown && (
@@ -115,7 +114,6 @@ const Header = ({ isMenu }) => {
         </nav>
       </header>
 
-      {/* Mobile Header */}
       <header className="flex md:hidden fixed top-0 w-full h-16 bg-gray-900 shadow-lg px-6 items-center justify-between text-white z-50">
         <span className="text-xl font-bold">
           <AiFillProduct className="size-8" />
@@ -124,8 +122,6 @@ const Header = ({ isMenu }) => {
           {mobileMenu ? "" : <FaBars />}
         </button>
       </header>
-
-      {/* Mobile Menu */}
       <div
         className={`fixed top-0 left-0 h-full w-full flex justify-center items-center bg-gray-900 text-white z-50 transform ${
           mobileMenu ? "translate-x-0" : "-translate-x-full"
@@ -142,7 +138,7 @@ const Header = ({ isMenu }) => {
                   <div
                     className="flex items-center gap-2 cursor-pointer"
                     onClick={handleDropDown}
-                    ref={dropdownRef} // Added ref here
+                    ref={dropdownRef}
                   >
                     {item.label} {dropDown ? <FaAngleUp /> : <FaAngleDown />}
                   </div>
