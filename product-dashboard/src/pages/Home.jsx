@@ -52,7 +52,7 @@ const Home = () => {
         product.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
         (selectedCategory === "all" ||
           product.category.toLowerCase() === selectedCategory.toLowerCase()) &&
-        (isLiked === true || localStorage.getItem(`${product.id}`) !== "true")
+        (isLiked === true || localStorage.getItem(`${product.id}`) === "true")
     )
     .sort((a, b) =>
       sortOrder === "asc" ? a.price - b.price : b.price - a.price
@@ -93,6 +93,7 @@ const Home = () => {
                 onChange={(selectedOption) =>
                   setSelectedCategory(selectedOption.value)
                 }
+                className="sm:w-44"
                 styles={{
                   control: (base, state) => ({
                     ...base,
@@ -142,6 +143,7 @@ const Home = () => {
               <Select
                 options={priceOptions}
                 onChange={(priceOption) => setSortOrder(priceOption.value)}
+                className="sm:w-44"
                 styles={{
                   control: (base, state) => ({
                     ...base,

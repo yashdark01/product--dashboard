@@ -30,7 +30,7 @@ const ProductCard = ({ product }) => {
           onClick={() => handleLikeProduct(product.id)}
           className="absolute bottom-0 right-5 cursor-pointer"
         >
-          {likeProduct ? (
+          {!likeProduct ? (
             <FaRegHeart className="text-red-400 size-5" />
           ) : (
             <FaHeart className="text-red-400 size-5" />
