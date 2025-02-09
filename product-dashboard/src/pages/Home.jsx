@@ -74,7 +74,7 @@ const Home = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <div className="flex gap-6 ">
+          <div className="flex gap-3 sm:gap-6 ">
             {/* <select
             className="w-full md:w-64 p-3 rounded-xl bg-white border border-black text-black  focus:ring-2 focus:ring-blue-500 transition duration-300"
             value={selectedCategory}
@@ -87,13 +87,13 @@ const Home = () => {
               </option>
             ))}
           </select> */}
-            <div className=" flex  justify-between items-center gap-6 ">
+            <div className=" flex  justify-between items-center gap-3 sm:gap-6 ">
               <Select
                 options={options}
                 onChange={(selectedOption) =>
                   setSelectedCategory(selectedOption.value)
                 }
-                className="sm:w-44"
+                className="w-36 sm:w-44"
                 styles={{
                   control: (base, state) => ({
                     ...base,

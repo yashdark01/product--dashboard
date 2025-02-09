@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaAngleDown, FaAngleUp, FaBars, FaTimes } from "react-icons/fa";
+import { AiFillProduct } from "react-icons/ai";
 
 const Header = ({ isMenu }) => {
   const [isVisible, setIsVisible] = useState(true);
@@ -57,7 +58,7 @@ const Header = ({ isMenu }) => {
         } hidden md:flex fixed transform duration-300 top-0 w-full h-20 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 shadow-lg justify-between px-8 md:px-8 lg:px-20 items-center text-white z-50`}
       >
         <span className="text-2xl font-bold tracking-wide cursor-pointer">
-          Product Dashboard
+          <AiFillProduct className="size-10 md:size-12"/>
         </span>
         <nav>
           <ul className="flex gap-10 items-center">
@@ -97,7 +98,7 @@ const Header = ({ isMenu }) => {
       </header>
 
       <header className="flex md:hidden fixed top-0 w-full h-16 bg-gray-900 shadow-lg px-6 items-center justify-between text-white z-50">
-        <span className="text-xl font-bold">Product Dashboard</span>
+        <span className="text-xl font-bold"><AiFillProduct className=" size-8"/></span>
         <button onClick={toggleMobileMenu} className="text-2xl">
           {mobileMenu ? "" : <FaBars />}
         </button>
